@@ -1,4 +1,5 @@
 import React from "react";
+import ReactDOM from "react-dom/client";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -7,8 +8,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import { render } from "react-dom";
-import { DatePicker } from "jalali-react-datepicker";
+import { RangeDatePicker, DatePicker } from "jalali-react-datepicker";
 const Leave = () => {
   const [open, setOpen] = React.useState(false);
 
@@ -19,6 +19,10 @@ const Leave = () => {
   const handleClose = () => {
     setOpen(false);
   };
+  function submitExample({ start, end }) {
+    console.log("start ", start);
+    console.log("end ", end);
+  }
   return (
     <div>
       <Box sx={{ "& button": { m: 1 } }}>
@@ -47,8 +51,13 @@ const Leave = () => {
               fullWidth
               variant="standard"
             />
-            render(
-            <DatePicker />, document.getElementById("root"));
+
+            <RangeDatePicker
+              timePicker
+              isRenderingButtons="boolean"
+              onClickSubmitButton={submitExample}
+            />
+            <DatePicker />
           </DialogContent>
           <DialogActions>
             <Button onClick={handleClose}>Cancel</Button>
